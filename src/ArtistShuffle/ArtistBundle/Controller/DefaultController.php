@@ -9,11 +9,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{name}")
+     * @Route("/")
      * @Template()
      */
-    public function indexAction($name)
+    public function indexAction($name = null)
     {
-        return array('name' => $name);
+        return $this->render('ArtistShuffleArtistBundle::index.html.twig');
+    }
+
+    /**
+     * @Route("/add")
+     * @Template()
+     */
+    public function addArtistAction()
+    {
+        return $this->render('ArtistShuffleArtistBundle::add.html.twig');
     }
 }

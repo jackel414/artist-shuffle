@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<form class="top-padding">
+    <div class="form-group">
+        <label for="artist-name">Artist Name</label>
+        <input type="text" class="form-control" id="artist-name" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label for="artist-genre">Genre</label>
+        <input type="text" class="form-control" id="artist-genre" placeholder="Genre">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}
