@@ -2,4 +2,9 @@
 {% block body %}
     <h1>Artist Shuffle!</h1>
     <p class="lead top-padding">Available Artists:</p>
+    {% for artist in artists %}
+        <p>Name : {{ artist.name }}</p>
+        <p>Genre : {{ artist.genre }}</p>
+    {% endfor %}
+    <a href="{{ path('add') }}">Add New</a>
 {% endblock %}

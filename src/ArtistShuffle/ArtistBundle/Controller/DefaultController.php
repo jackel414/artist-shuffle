@@ -14,26 +14,24 @@ class DefaultController extends Controller
      * @Route("/", name="homepage")
      * @Template()
      */
-    public function indexAction($name = null)
-    {
-        return $this->render('ArtistShuffleArtistBundle::index.html.twig');
+    public function indexAction()
+    { 
+        $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+
+        return $this->render('ArtistShuffleArtistBundle::index.html.twig', array( 'artists' => $artists ));
     }
 
     /**
-     * @Route("/add")
+     * @Route("/add", name="add")
      * @Template()
      */
     public function addArtistAction(Request $request)
     {
-        // create a artist and give it some dummy data for this example
         $artist = new Artist();
-        //$task->setTask('Write a blog post');
-        //$task->setDueDate(new \DateTime('tomorrow'));
-
         $form = $this->createFormBuilder($artist)
             ->add('name', 'text')
             ->add('genre', 'text')
-            ->add('spotify', 'text')
+            ->add('spotify', 'checkbox', array( 'required' => false ))
             ->add('save', 'submit', array('label' => 'Create Artist'))
             ->getForm();
 
@@ -47,21 +45,6 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
-
         return $this->render('ArtistShuffleArtistBundle::add.html.twig', array( 'form' => $form->createView() ) );
-
-        /*
-        $this->request = Request::createFromGlobals();
-        $method = strtolower($this->request->getMethod());
-
-        if ( $method === 'post' )
-        {
-            //do stuff...
-        }
-        elseif ( $method === 'get' )
-        {
-            return $this->render( 'ArtistShuffleArtistBundle::add.html.twig' );
-        }
-        */
     }
 }
