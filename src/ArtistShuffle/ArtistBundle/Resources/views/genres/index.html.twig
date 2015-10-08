@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Artist Shuffle!</h1>
+    <h3 class="top-padding">Available Genres:</h3>
+    <ul>
+    {% for genre in genres %}
+        <li>{{ genre.name }}</li>
+    {% endfor %}
+    </ul>
+    <p>&nbsp;</p>
+    <p><a href="{{ path('genres_add') }}">Add New Genre</a> | <a href="{{ path('homepage') }}">Home</a></p>
+{% endblock %}

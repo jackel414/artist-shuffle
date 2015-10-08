@@ -1,16 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Artist Shuffle!</h1>
-    <p class="lead top-padding">Available Artists:</p>
-    {% for artist in artists %}
-        <p>Name : {{ artist.name }}</p>
-        <p>Genre : {{ artist.genre.name }}</p>
-    {% endfor %}
-    <p class="lead top-padding">Available Genres:</p>
-    {% for genre in genres %}
-        <p>Name : {{ genre.name }}</p>
-    {% endfor %}
+    <p class="lead top-padding">Shuffling soon...</p>
     <p>&nbsp;</p>
-    <p><a href="{{ path('add_artist') }}">Add New Artist</a></p>
-    <p><a href="{{ path('add_genre') }}">Add New Genre</a></p>
+    <p><a href="{{ path('artists_index') }}">Artists</a> | <a href="{{ path('genres_index') }}">Genres</a></p>
 {% endblock %}

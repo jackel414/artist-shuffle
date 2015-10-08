@@ -18,14 +18,22 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
-        $genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll();
-
-        return $this->render('ArtistShuffleArtistBundle::index.html.twig', array( 'artists' => $artists, 'genres' => $genres ));
+        return $this->render('ArtistShuffleArtistBundle::index.html.twig');
     }
 
     /**
-     * @Route("/artists/add", name="add_artist")
+     * @Route("/artists", name="artists_index")
+     * @Template()
+    */
+    public function indexArtistAction()
+    {
+        $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+
+        return $this->render('ArtistShuffleArtistBundle::artists/index.html.twig', array( 'artists' => $artists ));
+    }
+
+    /**
+     * @Route("/artists/add", name="artists_add")
      * @Template()
      */
     public function addArtistAction(Request $request)
@@ -59,7 +67,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("genres/add", name="add_genre")
+     * @Route("/genres", name="genres_index")
+     * @Template()
+    */
+    public function indexGenreAction()
+    {
+        $genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll();
+
+        return $this->render('ArtistShuffleArtistBundle::genres/index.html.twig', array( 'genres' => $genres ));
+    }
+
+    /**
+     * @Route("genres/add", name="genres_add")
      * @Template()
      */
     public function addGenreAction(Request $request)
