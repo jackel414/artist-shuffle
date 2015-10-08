@@ -99,28 +99,5 @@ class Artist
     {
         return $this->spotify;
     }
-
-    /**
-     * Set genre
-     *
-     * @param \ArtistShuffle\ArtistBundle\Entity\Genre $genre
-     *
-     * @return Artist
-     */
-    public function setGenre(\ArtistShuffle\ArtistBundle\Entity\Genre $genre = null)
-    {
-        $this->genre = $genre;
-
-        return $this;
-    }
-
-    /**
-     * Get genre
-     *
-     * @return \ArtistShuffle\ArtistBundle\Entity\Genre
-     */
-    public function getGenre()
-    {
-        return $this->genre;
-    }
 }
+
