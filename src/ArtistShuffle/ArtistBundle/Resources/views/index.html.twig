@@ -4,7 +4,7 @@
     <p class="lead top-padding">Available Artists:</p>
     {% for artist in artists %}
         <p>Name : {{ artist.name }}</p>
-        <p>Genre : {{ artist.genre }}</p>
+        <p>Genre : {{ artist.genre.name }}</p>
     {% endfor %}
     <p class="lead top-padding">Available Genres:</p>
     {% for genre in genres %}

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use ArtistShuffle\ArtistBundle\Entity\Artist;
 use ArtistShuffle\ArtistBundle\Entity\Genre;
+use Doctrine\ORM\EntityRepository;
 
 class DefaultController extends Controller
 {
@@ -32,11 +33,18 @@ class DefaultController extends Controller
         $artist = new Artist();
         $form = $this->createFormBuilder($artist)
             ->add('name', 'text')
-            ->add('genre', 'entity', array( 'class' => 'ArtistShuffleArtistBundle:Genre', 'choice_label' => 'name' ))
+            ->add('genre', 'entity', array( 
+                'class' => 'ArtistShuffleArtistBundle:Genre',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')->orderBy('u.name', 'ASC');
+                },
+                'choice_label' => 'name',
+                'placeholder' => '',
+            ))
             ->add('spotify', 'checkbox', array( 'required' => false ))
             ->add('save', 'submit', array('label' => 'Create Artist'))
             ->getForm();
-        
+
         $form->handleRequest($request);
 
         if ( $form->isValid() )
