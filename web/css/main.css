@@ -1,5 +1,20 @@
-.top-padding {
-    padding-top: 20px;
+html{
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+}
+
+#content {
+    padding-bottom: 80px;
 }
 
 #footer {
@@ -9,10 +24,13 @@
     bottom: 0;
     left: 0;
 }
-
 #footer div {
     left: 5;
     bottom: 0;
     position: absolute;
     padding-left: 10px;
+}
+
+.top-padding {
+    padding-top: 20px;
 }

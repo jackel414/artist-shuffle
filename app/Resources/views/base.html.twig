@@ -9,11 +9,15 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body class="container">
-        {% block body %}{% endblock %}
-        <div id="footer">
-            <div>
-                <p>&#169; <a href="http://mays.io" target="_blank">Mays | io</a></p>
+    <body>
+        <div id="wrap">
+            <div id="content" class="container">
+                {% block body %}{% endblock %}
+            </div>
+            <div id="footer">
+                <div>
+                    <p>&#169; <a href="http://mays.io" target="_blank">Mays | io</a></p>
+                </div>
             </div>
         </div>
         {% block javascripts %}{% endblock %}
