@@ -24,7 +24,7 @@ class DefaultController extends Controller
     /**
      * @Route("/artists", name="artists_index")
      * @Template()
-    */
+     */
     public function indexArtistAction()
     {
         $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
@@ -69,7 +69,7 @@ class DefaultController extends Controller
     /**
      * @Route("/genres", name="genres_index")
      * @Template()
-    */
+     */
     public function indexGenreAction()
     {
         $genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll();
@@ -78,7 +78,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("genres/add", name="genres_add")
+     * @Route("/genres/add", name="genres_add")
      * @Template()
      */
     public function addGenreAction(Request $request)
@@ -100,5 +100,34 @@ class DefaultController extends Controller
             return $this->redirectToRoute('homepage');
         }
         return $this->render('ArtistShuffleArtistBundle::genres/add.html.twig', array( 'form' => $form->createView() ) );
+    }
+
+    /**
+     * @Route("/shuffle/{genre}", name="shuffle")
+     * @Template()
+     */
+    public function shuffleAction($genre = null)
+    {
+        if ( $genre )
+        {
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery(
+                'SELECT a
+                FROM ArtistShuffleArtistBundle:Artist a
+                WHERE a.genre = :genre
+                ORDER BY a.name ASC'
+            )->setParameter('genre', $genre);
+            $artists = $query->getResult();
+        }
+        else
+        {
+            $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+        }
+
+        $index = rand( 0, ( count($artists) - 1) );
+        $artist = $artists[$index];
+
+        $number = count($artists);                
+        return $this->render('ArtistShuffleArtistBundle::shuffle.html.twig', array( 'artist' => $artist ));
     }
 }

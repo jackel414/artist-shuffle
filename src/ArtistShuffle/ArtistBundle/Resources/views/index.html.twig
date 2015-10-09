@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Artist Shuffle!</h1>
-    <p class="lead top-padding">Shuffling soon...</p>
+    <a class="btn btn-default" href="{{ path('shuffle') }}" role="button">Shuffle!</a>
     <p>&nbsp;</p>
     <p><a href="{{ path('artists_index') }}">Artists</a> | <a href="{{ path('genres_index') }}">Genres</a></p>
 {% endblock %}
