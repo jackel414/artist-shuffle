@@ -14,7 +14,26 @@ body {
 }
 
 #content {
+    padding-top: 200px;
     padding-bottom: 80px;
+}
+
+#content table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#content td {
+    width: 50%;
+}
+
+#content td:nth-child(1) {
+    text-align: right;
+}
+
+#content td:nth-child(2) {
+    text-align: left;
+    padding-left: 3px;
 }
 
 #footer {
@@ -33,4 +52,8 @@ body {
 
 .top-padding {
     padding-top: 20px;
+}
+
+.bottom-padding {
+    padding-bottom: 20px;
 }

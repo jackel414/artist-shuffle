@@ -6,6 +6,12 @@
         <p class="lead top-padding">{{ artist.name }}</p>
         <p>Genre : {{ artist.genre.name }}</p>
     {% endfor %}
-    <p>&nbsp;</p>
-    <p><a href="{{ path('artists_add') }}">Add New Artist</a> | <a href="{{ path('homepage') }}">Home</a></p>
+    <table>
+        <tbody>
+            <tr>
+                <td><a href="{{ path('artists_add') }}">Add New Artist</a> |</td>
+                <td><a href="{{ path('homepage') }}">Home</a></td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

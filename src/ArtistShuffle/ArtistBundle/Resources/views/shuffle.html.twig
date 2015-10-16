@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>Artist Shuffle!</h1>
-    <h3 class="top-padding">Available Artists:</h3>
-    <p>{{ artist.name }}</p>
-    <p>&nbsp;</p>
-    <p><a href="{{ path('artists_add') }}">Add New Artist</a> | <a href="{{ path('homepage') }}">Home</a></p>
+    <h1 class="bottom-padding">Artist Shuffle!</h1>
+    <p class="bottom-padding lead">{{ artist.name }}</p>
+    <a class="btn btn-default" href="{{ path('shuffle') }}" role="button">Again!</a>
+    <table class="top-padding">
+        <tbody>
+            <tr>
+                <td><a href="{{ path('artists_index') }}">Artists</a> |</td>
+                <td><a href="{{ path('genres_index') }}">Genres</a></td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

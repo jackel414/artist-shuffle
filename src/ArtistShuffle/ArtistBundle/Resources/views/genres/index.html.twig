@@ -7,6 +7,12 @@
         <li>{{ genre.name }}</li>
     {% endfor %}
     </ul>
-    <p>&nbsp;</p>
-    <p><a href="{{ path('genres_add') }}">Add New Genre</a> | <a href="{{ path('homepage') }}">Home</a></p>
+    <table>
+        <tbody>
+            <tr>
+                <td><a href="{{ path('genres_add') }}">Add New Genre</a> |</td>
+                <td><a href="{{ path('homepage') }}">Home</a></td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}
