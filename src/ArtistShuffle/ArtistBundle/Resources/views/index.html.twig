@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1 class="bottom-padding">Artist Shuffle!</h1>
-    <a class="btn btn-default" href="{{ path('shuffle') }}" role="button">Shuffle!</a>
-    <table>
-        <tbody>
-            <tr>
-                <td><a href="{{ path('artists_index') }}">Artists</a> |</td>
-                <td><a href="{{ path('genres_index') }}">Genres</a></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-sm-4 col-sm-offset-4">
+        <h1 class="bottom-padding">Artist Shuffle!</h1>
+        <p class="bottom-padding lead collapse" id="artist_name"></p>
+        <div class="col-sm-12">
+            {{ form_start(genre_form) }}
+            {{ form_widget(genre_form) }}
+            {{ form_end(genre_form) }}
+        </div>
+        <a class="btn btn-default" href="#" id="shuffle" role="button">Shuffle!</a>
+        <table>
+            <tbody>
+                <tr>
+                    <td><a href="{{ path('artists_index') }}">Artists</a> |</td>
+                    <td><a href="{{ path('genres_index') }}">Genres</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
