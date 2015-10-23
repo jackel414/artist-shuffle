@@ -74,7 +74,7 @@ class DefaultController extends Controller
             $em->persist($artist);
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('artists_index');
         }
         return $this->render('ArtistShuffleArtistBundle::artists/add.html.twig', array( 'form' => $form->createView() ) );
     }
@@ -110,7 +110,7 @@ class DefaultController extends Controller
             $em->persist($genre);
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('genres_index');
         }
         return $this->render('ArtistShuffleArtistBundle::genres/add.html.twig', array( 'form' => $form->createView() ) );
     }
