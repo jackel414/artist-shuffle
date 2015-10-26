@@ -10,3 +10,5 @@
 /vendor/
 /web/bundles/
 *.DS_Store
+*favicon.gif
+*favicon.ico
