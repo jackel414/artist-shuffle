@@ -2,10 +2,13 @@
 {% block body %}
     <h1>Artist Shuffle!</h1>
     <h3 class="top-padding">Available Artists:</h3>
-    {% for artist in artists %}
-        <p class="lead top-padding">{{ artist.name }}</p>
-        <p>Genre : {{ artist.genre.name }}</p>
-    {% endfor %}
+    <div class="col-sm-4 col-sm-offset-4" id="genre_list">
+        <ul>
+        {% for artist in artists %}
+            <li>{{ artist.name }} ({{ artist.genre.name }})</li>
+        {% endfor %}
+        </ul>
+    </div>
     <table>
         <tbody>
             <tr>
