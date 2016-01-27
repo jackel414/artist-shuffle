@@ -62,3 +62,13 @@ body {
 .bottom-padding {
     padding-bottom: 20px;
 }
+
+#page_loading {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    width: 90%;
+    top: 75px;
+    height: 60;
+    width: 60;
+}

@@ -2,7 +2,11 @@
 {% block body %}
     <div class="col-sm-4 col-sm-offset-4">
         <h1 class="bottom-padding">Artist Shuffle!</h1>
-        <p class="bottom-padding lead collapse" id="artist_name"></p>
+        <p class="bottom-padding lead" id="artist_name">
+            &nbsp;
+            <div id="page_loading"><img src="images/ajax-loader.gif" height="60" width="60"/></div>
+        </p>
+        
         <div class="col-sm-12">
             {{ form_start(genre_form) }}
             {{ form_widget(genre_form) }}
