@@ -30,3 +30,9 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/users, roles: ROLE_ADMIN }
+        - { path: ^/artist, roles: ROLE_ADMIN }
+        - { path: ^/genres, roles: ROLE_ADMIN }
