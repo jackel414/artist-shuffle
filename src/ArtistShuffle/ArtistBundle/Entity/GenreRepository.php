@@ -10,4 +10,8 @@ namespace ArtistShuffle\ArtistBundle\Entity;
  */
 class GenreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
 }
