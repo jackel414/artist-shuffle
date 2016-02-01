@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new ArtistShuffle\ArtistBundle\ArtistShuffleArtistBundle(),
             new ArtistShuffle\UserBundle\ArtistShuffleUserBundle(),
+            new ArtistShuffle\SecurityBundle\ArtistShuffleSecurityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

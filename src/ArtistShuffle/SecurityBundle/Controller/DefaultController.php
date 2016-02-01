@@ -1,13 +1,13 @@
 <?php
 
-namespace ArtistShuffle\ArtistBundle\Controller;
+namespace ArtistShuffle\SecurityBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @Route("/login", name="login_route")
