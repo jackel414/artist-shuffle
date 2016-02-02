@@ -16,3 +16,6 @@ artist_shuffle_artist:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+logout:
+    path: /logout
