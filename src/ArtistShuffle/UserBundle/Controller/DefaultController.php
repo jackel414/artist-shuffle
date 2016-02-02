@@ -26,7 +26,7 @@ class DefaultController extends Controller
      * @Route("/users/add", name="users_add")
      * @Template()
      */
-    public function addUserAction(Request $request)
+    public function addAction(Request $request)
     {
         $user = new User();
         $form = $this->createFormBuilder($user)
