@@ -1,61 +1,115 @@
 <?php
-
 namespace ArtistShuffle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
- *
- * @ORM\Table()
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ArtistShuffle\UserBundle\Entity\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=255)
-     */
-    private $firstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=255)
-     */
-    private $lastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="is_active", type="boolean")
      */
-    private $password;
+    private $isActive;
 
+    public function __construct()
+    {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid(null, true));
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
 
     /**
      * Get id
@@ -65,54 +119,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     *
-     * @return User
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     *
-     * @return User
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
     }
 
     /**
@@ -130,13 +136,17 @@ class User
     }
 
     /**
-     * Get username
+     * Set password
      *
-     * @return string
+     * @param string $password
+     *
+     * @return User
      */
-    public function getUsername()
+    public function setPassword($password)
     {
-        return $this->username;
+        $this->password = $password;
+
+        return $this;
     }
 
     /**
@@ -164,27 +174,26 @@ class User
     }
 
     /**
-     * Set password
+     * Set isActive
      *
-     * @param string $password
+     * @param boolean $isActive
      *
      * @return User
      */
-    public function setPassword($password)
+    public function setIsActive($isActive)
     {
-        $this->password = $password;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     /**
-     * Get password
+     * Get isActive
      *
-     * @return string
+     * @return boolean
      */
-    public function getPassword()
+    public function getIsActive()
     {
-        return $this->password;
+        return $this->isActive;
     }
 }
-

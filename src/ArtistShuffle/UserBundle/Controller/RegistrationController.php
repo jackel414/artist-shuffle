@@ -1,17 +1,17 @@
 <?php
-namespace AppBundle\Controller;
+namespace ArtistShuffle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use AppBundle\Form\UserType;
-use AppBundle\Entity\User;
+use ArtistShuffle\UserBundle\Form\UserType;
+use ArtistShuffle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends Controller
 {
     /**
-     * @Route("/old_register", name="old_user_registration")
+     * @Route("/register", name="user_registration")
      */
     public function registerAction(Request $request)
     {

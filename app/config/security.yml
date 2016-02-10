@@ -6,7 +6,7 @@ security:
     providers:
         our_db_provider:
             entity:
-                class: AppBundle:User
+                class: ArtistShuffleUserBundle:User
                 property: username
 
     firewalls:
@@ -22,7 +22,7 @@ security:
             # anonymous:    true
 
     encoders:
-        AppBundle\Entity\User:
+        ArtistShuffle\UserBundle\Entity\User:
             algorithm: bcrypt
 
     access_control:
