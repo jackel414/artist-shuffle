@@ -3,7 +3,14 @@
 
 <div class="col-sm-4 col-sm-offset-4">
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+
+        <button class="btn btn-default" type="submit">Register!</button>
     {{ form_end(form) }}
     
     <p><a href="{{ path('homepage') }}">Home</a></p>

@@ -19,7 +19,13 @@ security:
             pattern:    ^/
             http_basic: ~
             provider: our_db_provider
-            # anonymous:    true
+            anonymous: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: /logout
+                target: /
 
     encoders:
         ArtistShuffle\UserBundle\Entity\User:
@@ -28,5 +34,5 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/users, roles: ROLE_ADMIN }
-        - { path: ^/artist, roles: ROLE_ADMIN }
-        - { path: ^/genres, roles: ROLE_ADMIN }
+        - { path: ^/artist, roles: ROLE_USER }
+        - { path: ^/genres, roles: ROLE_USER }

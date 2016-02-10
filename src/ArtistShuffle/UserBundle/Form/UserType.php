@@ -13,11 +13,13 @@ class UserType extends AbstractType
             ->add('email', 'email')
             ->add('username', 'text')
             ->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            )
-        );
+                    'type' => 'password',
+                    'first_options'  => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Repeat Password'),
+                    )
+                )
+            ->add('firstName', 'text')
+            ->add('lastName', 'text');
     }
 
     public function configureOptions(OptionsResolver $resolver)

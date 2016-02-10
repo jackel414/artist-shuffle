@@ -19,6 +19,20 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
@@ -44,11 +58,15 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
+        $this->roles = 'ROLE_USER';
     }
 
     public function getPlainPassword()
@@ -68,8 +86,6 @@ class User implements UserInterface, \Serializable
 
     public function getSalt()
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
         return null;
     }
 
@@ -78,10 +94,10 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
+    // public function getRoles()
+    // {
+    //     return array('ROLE_USER');
+    // }
 
     public function eraseCredentials()
     {
@@ -93,9 +109,7 @@ class User implements UserInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->password
         ));
     }
 
@@ -105,9 +119,7 @@ class User implements UserInterface, \Serializable
         list (
             $this->id,
             $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
+            $this->password
         ) = unserialize($serialized);
     }
 
@@ -119,6 +131,52 @@ class User implements UserInterface, \Serializable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+    
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 
     /**
@@ -196,4 +254,29 @@ class User implements UserInterface, \Serializable
     {
         return $this->isActive;
     }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return explode(",", $this->roles);
+    }
+
 }
