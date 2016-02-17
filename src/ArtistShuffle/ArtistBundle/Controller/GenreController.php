@@ -31,6 +31,7 @@ class GenreController extends Controller
     public function addAction(Request $request)
     {
         $genre = new Genre();
+        $genre->setUser($this->getUser());
         $form = $this->createFormBuilder($genre)
             ->add('name', 'text')
             ->add('save', 'submit', array('label' => 'Create Genre'))

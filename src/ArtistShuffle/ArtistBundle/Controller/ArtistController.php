@@ -31,6 +31,7 @@ class ArtistController extends Controller
     public function addAction(Request $request)
     {
         $artist = new Artist();
+        $artist->setUser($this->getUser());
         $form = $this->createFormBuilder($artist)
             ->add('name', 'text')
             ->add('genre', 'entity', array( 
