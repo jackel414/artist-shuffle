@@ -5,6 +5,7 @@ namespace ArtistShuffle\ArtistBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+// use ArtistShuffle\UserBundle\Entity\User;
 
 /**
  * Artist
@@ -43,6 +44,12 @@ class Artist
      * @ORM\JoinColumn(name="genre_id", referencedColumnName="id")
      */
     protected $genre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ArtistShuffle\UserBundle\Entity\User", inversedBy="artists")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
 
     /**
@@ -125,5 +132,29 @@ class Artist
     public function getGenre()
     {
         return $this->genre;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ArtistShuffle\UserBundle\Entity\User $user
+     *
+     * @return Artist
+     */
+    public function setUser(\ArtistShuffle\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ArtistShuffle\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

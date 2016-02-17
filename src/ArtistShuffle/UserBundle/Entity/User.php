@@ -63,10 +63,16 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ArtistShuffle\ArtistBundle\Entity\Artist", mappedBy="user")
+     */
+    protected $artists;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->roles = 'ROLE_USER';
+        $this->artists = new ArrayCollection();
     }
 
     public function getPlainPassword()
@@ -279,4 +285,23 @@ class User implements UserInterface, \Serializable
         return explode(",", $this->roles);
     }
 
+    /**
+     * Remove artist
+     *
+     * @param \ArtistShuffle\ArtistBundle\Entity\Artist $artist
+     */
+    public function removeArtist(\ArtistShuffle\ArtistBundle\Entity\Artist $artist)
+    {
+        $this->artists->removeElement($artist);
+    }
+
+    /**
+     * Get artists
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArtists()
+    {
+        return $this->artists;
+    }
 }
