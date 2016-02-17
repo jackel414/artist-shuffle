@@ -29,11 +29,17 @@ class Genre
      */
     private $name;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Artist", mappedBy="genre")
      */
     protected $artists;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ArtistShuffle\UserBundle\Entity\User", inversedBy="genres")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
 
     public function __construct()
     {
@@ -106,5 +112,29 @@ class Genre
     public function getArtists()
     {
         return $this->artists;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ArtistShuffle\UserBundle\Entity\User $user
+     *
+     * @return Genre
+     */
+    public function setUser(\ArtistShuffle\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ArtistShuffle\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

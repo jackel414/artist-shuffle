@@ -68,6 +68,11 @@ class User implements UserInterface, \Serializable
      */
     protected $artists;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ArtistShuffle\ArtistBundle\Entity\Genre", mappedBy="user")
+     */
+    protected $genres;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -303,5 +308,25 @@ class User implements UserInterface, \Serializable
     public function getArtists()
     {
         return $this->artists;
+    }
+
+    /**
+     * Remove genre
+     *
+     * @param \ArtistShuffle\ArtistBundle\Entity\Genre $genre
+     */
+    public function removeGenres(\ArtistShuffle\ArtistBundle\Entity\Genre $genre)
+    {
+        $this->genres->removeElement($genre);
+    }
+
+    /**
+     * Get genres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGenres()
+    {
+        return $this->genres;
     }
 }
