@@ -10,8 +10,15 @@ namespace ArtistShuffle\ArtistBundle\Entity;
  */
 class ArtistRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAll()
+    public function findAll( $user_id = null )
     {
-        return $this->findBy(array(), array('name' => 'ASC'));
+        if ( $user_id )
+        {
+            return $this->findBy(array('user' => $user_id), array('name' => 'ASC'));
+        }
+        else
+        {
+            return $this->findBy(array(), array('name' => 'ASC'));
+        }
     }
 }

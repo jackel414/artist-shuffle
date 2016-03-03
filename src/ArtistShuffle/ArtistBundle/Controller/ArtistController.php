@@ -19,7 +19,7 @@ class ArtistController extends Controller
      */
     public function indexAction()
     {
-        $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+        $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll( $this->getUser()->getId() );
 
         return $this->render('ArtistShuffleArtistBundle::artists/index.html.twig', array( 'artists' => $artists ));
     }
@@ -37,7 +37,7 @@ class ArtistController extends Controller
             ->add('genre', 'entity', array( 
                 'class' => 'ArtistShuffleArtistBundle:Genre',
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')->orderBy('u.name', 'ASC');
+                    return $er->createQueryBuilder('u')->where('u.user = :user')->setParameter('user', $this->getUser()->getId() )->orderBy('u.name', 'ASC');
                 },
                 'choice_label' => 'name',
                 'placeholder' => '',

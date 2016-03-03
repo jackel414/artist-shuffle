@@ -19,7 +19,7 @@ class GenreController extends Controller
      */
     public function indexAction()
     {
-        $genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll();
+        $genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll( $this->getUser()->getId() );
 
         return $this->render('ArtistShuffleArtistBundle::genres/index.html.twig', array( 'genres' => $genres ));
     }
