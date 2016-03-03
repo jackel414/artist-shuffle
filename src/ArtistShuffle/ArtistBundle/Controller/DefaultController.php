@@ -42,13 +42,14 @@ class DefaultController extends Controller
                     'SELECT a
                     FROM ArtistShuffleArtistBundle:Artist a
                     WHERE a.genre = :genre
+                    AND a.user = :user
                     ORDER BY a.name ASC'
-                )->setParameter('genre', $genre);
+                )->setParameter('genre', $genre)->setParameter('user', $this->getUser()->getId());
                 $artists = $query->getResult();
             }
             else
             {
-                $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+                $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll( $this->getUser()->getId() );
             }
 
             $index = rand( 0, ( count($artists) - 1) );
@@ -66,7 +67,7 @@ class DefaultController extends Controller
             ->add('genre', 'entity', array( 
                 'class' => 'ArtistShuffleArtistBundle:Genre',
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')->orderBy('u.name', 'ASC');
+                    return $er->createQueryBuilder('u')->where('u.user = :user')->setParameter('user', $this->getUser()->getId() )->orderBy('u.name', 'ASC');
                 },
                 'choice_label' => 'name',
                 'placeholder' => 'Any Genre',
