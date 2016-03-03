@@ -72,3 +72,8 @@ body {
     height: 60;
     width: 60;
 }
+
+#shuffle-link {
+    padding-bottom: 15px;
+    font-size: 25px;
+}

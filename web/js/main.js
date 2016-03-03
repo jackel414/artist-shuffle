@@ -8,12 +8,17 @@ $(document).ready(function() {
         console.log('clicked!');
         var genre = $("#form_genre").val();
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "/shuffle",
             data: { genre },
             success: function(result) {
                 pageLoading.hide();
                 container.html(result);
+                container.show();
+            },
+            error: function() {
+                pageLoading.hide();
+                container.html('No Artists Available');
                 container.show();
             }
         });

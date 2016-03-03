@@ -19,6 +19,49 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        return $this->render('ArtistShuffleArtistBundle::index.html.twig');
+    }
+
+    /**
+     * @Route("/shuffle", name="shuffle")
+     * @Template()
+     */
+    public function shuffleAction(Request $request)
+    {
+        //Get the current method from the HTTP headers
+        $method = strtolower($request->getMethod());
+
+        if ( $method === 'post' )
+        {
+            $genre = $request->request->get('genre');
+
+            if ( $genre )
+            {
+                $em = $this->getDoctrine()->getManager();
+                $query = $em->createQuery(
+                    'SELECT a
+                    FROM ArtistShuffleArtistBundle:Artist a
+                    WHERE a.genre = :genre
+                    ORDER BY a.name ASC'
+                )->setParameter('genre', $genre);
+                $artists = $query->getResult();
+            }
+            else
+            {
+                $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
+            }
+
+            $index = rand( 0, ( count($artists) - 1) );
+            $artist = $artists[$index];
+
+            $artist_name = $artist->getName();
+
+            $response = new Response( $artist_name );
+            $response->headers->set('Content_Type', 'application/json');
+
+            return $response;
+        }
+
         $genre_form = $this->createFormBuilder()
             ->add('genre', 'entity', array( 
                 'class' => 'ArtistShuffleArtistBundle:Genre',
@@ -31,41 +74,6 @@ class DefaultController extends Controller
             ))
             ->getForm();
 
-        return $this->render('ArtistShuffleArtistBundle::index.html.twig', array( 'genre_form' => $genre_form->createView() ));
-    }
-
-    /**
-     * @Route("/shuffle", name="shuffle")
-     * @Template()
-     */
-    public function shuffleAction(Request $request)
-    {
-        $genre = $request->query->get('genre');
-
-        if ( $genre )
-        {
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery(
-                'SELECT a
-                FROM ArtistShuffleArtistBundle:Artist a
-                WHERE a.genre = :genre
-                ORDER BY a.name ASC'
-            )->setParameter('genre', $genre);
-            $artists = $query->getResult();
-        }
-        else
-        {
-            $artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll();
-        }
-
-        $index = rand( 0, ( count($artists) - 1) );
-        $artist = $artists[$index];
-
-        $artist_name = $artist->getName();
-
-        $response = new Response( $artist_name );
-        $response->headers->set('Content_Type', 'application/json');
-
-        return $response;
+        return $this->render('ArtistShuffleArtistBundle::shuffle.html.twig', array( 'genre_form' => $genre_form->createView() ));
     }
 }

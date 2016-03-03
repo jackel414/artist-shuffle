@@ -2,9 +2,17 @@
 {% block body %}
     <div class="col-sm-4 col-sm-offset-4">
         <h1 class="bottom-padding">Artist Shuffle!</h1>
+        <p class="bottom-padding lead" id="artist_name">
+            &nbsp;
+            <div id="page_loading"><img src="images/ajax-loader.gif" height="60" width="60"/></div>
+        </p>
+        
         <div class="col-sm-12">
-            <p id="shuffle-link"><a href="{{ path('shuffle') }}">Start Shuffling</a></p>
+            {{ form_start(genre_form) }}
+            {{ form_widget(genre_form) }}
+            {{ form_end(genre_form) }}
         </div>
+        <a class="btn btn-default" href="#" id="shuffle" role="button">Shuffle!</a>
         <table>
             <tbody>
                 <tr>
