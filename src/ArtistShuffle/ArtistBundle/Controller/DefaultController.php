@@ -19,6 +19,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        //check if user is logged in. if so - redirect to shuffle page
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('shuffle');
+        }
+
         return $this->render('ArtistShuffleArtistBundle::index.html.twig');
     }
 
