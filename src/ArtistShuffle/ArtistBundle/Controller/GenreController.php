@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use ArtistShuffle\ArtistBundle\Entity\Artist;
 use ArtistShuffle\ArtistBundle\Entity\Genre;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormError;
 
 class GenreController extends Controller
 {
@@ -41,6 +42,21 @@ class GenreController extends Controller
 
         if ( $form->isValid() )
         {
+            $name = $genre->getName();
+            $existing_genres = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Genre' )->findAll( $this->getUser()->getId() );
+
+            $existing_genre_names = array();
+            foreach ( $existing_genres as $existing_genre )
+            {
+                array_push( $existing_genre_names, $existing_genre->getName() );
+            }
+
+            if ( in_array($name, $existing_genre_names) )
+            {
+                $form->get('name')->addError(new FormError('This genre already exists.'));
+                return $this->render('ArtistShuffleArtistBundle::genres/add.html.twig', array( 'form' => $form->createView() ) );
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($genre);
             $em->flush();

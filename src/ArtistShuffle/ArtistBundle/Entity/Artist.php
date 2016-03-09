@@ -4,14 +4,12 @@ namespace ArtistShuffle\ArtistBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Artist
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="ArtistShuffle\ArtistBundle\Entity\ArtistRepository")
- * @UniqueEntity("name", message="This artist has already been added.")
  */
 class Artist
 {
@@ -27,7 +25,7 @@ class Artist
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 

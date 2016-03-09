@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use ArtistShuffle\ArtistBundle\Entity\Artist;
 use ArtistShuffle\ArtistBundle\Entity\Genre;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormError;
 
 class ArtistController extends Controller
 {
@@ -50,6 +51,21 @@ class ArtistController extends Controller
 
         if ( $form->isValid() )
         {
+            $name = $artist->getName();
+            $existing_artists = $this->getDoctrine()->getRepository( 'ArtistShuffleArtistBundle:Artist' )->findAll( $this->getUser()->getId() );
+
+            $existing_artist_names = array();
+            foreach ( $existing_artists as $existing_artist )
+            {
+                array_push( $existing_artist_names, $existing_artist->getName() );
+            }
+
+            if ( in_array($name, $existing_artist_names) )
+            {
+                $form->get('name')->addError(new FormError('This artist already exists.'));
+                return $this->render('ArtistShuffleArtistBundle::artists/add.html.twig', array( 'form' => $form->createView() ) );
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($artist);
             $em->flush();
