@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="col-sm-4 col-sm-offset-4">
+    	<img src="{{ asset('images/logo.png') }}" alt="logo" height="300" width="300" />
         <h1 class="bottom-padding">Artist Shuffle!</h1>
         <div class="col-sm-12">
-            <p id="shuffle-link"><a href="{{ path('shuffle') }}">Start Shuffling</a></p>
+        	<p><a href="{{ path('user_registration') }}">Sign Up</a>&nbsp; | &nbsp;<a href="{{ path('shuffle') }}">Login</a></p>
         </div>
     </div>
 {% endblock %}

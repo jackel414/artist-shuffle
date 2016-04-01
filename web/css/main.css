@@ -14,7 +14,7 @@ body {
 }
 
 #content {
-    padding-top: 200px;
+    padding-top: 50px;
     padding-bottom: 80px;
 }
 
@@ -27,12 +27,7 @@ body {
     width: 50%;
 }
 
-#content td:nth-child(1) {
-    text-align: right;
-}
-
 #content td:nth-child(2) {
-    text-align: left;
     padding-left: 3px;
 }
 
@@ -76,4 +71,8 @@ body {
 #shuffle-link {
     padding-bottom: 15px;
     font-size: 25px;
+}
+
+.test-border {
+    border: 1px solid red;
 }
